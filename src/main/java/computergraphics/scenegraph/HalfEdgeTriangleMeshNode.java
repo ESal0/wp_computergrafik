@@ -8,6 +8,7 @@ import com.jogamp.opengl.GL2;
 import computergraphics.datastructures.HalfEdge;
 import computergraphics.datastructures.HalfEdgeTriangleMesh;
 import computergraphics.datastructures.ObjIO;
+import computergraphics.datastructures.TriangleFacet;
 import computergraphics.datastructures.Vertex;
 
 public class HalfEdgeTriangleMeshNode extends Node {
@@ -25,6 +26,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
 
 		// set the opposites for each halfEdge in the mesh
 		triangleMesh.setOppositeHalfEdges();
+		triangleMesh.computeTriangleNormals();
 	}
 
 	private void init(GL2 gl) {
@@ -43,7 +45,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
 		for (int i = 0; i < triangleMesh.getNumberOfTriangles(); i++) {
 			// Get the halfEdge of the facet
 			HalfEdge halfEdge = triangleMesh.getFacet(i).getHalfEdge();
-
+			TriangleFacet facet = triangleMesh.getFacet(i);
 			// Color = brown(-ish)
 			gl.glColor3d(0.6, 0.4, 0.2);
 
@@ -55,7 +57,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
 				Vertex vertex = halfEdge.getStartVertex();
 
 				// setting the normal of the vertex
-				gl.glNormal3d(vertex.getNormal().get(0), vertex.getNormal().get(1), vertex.getNormal().get(2));
+				gl.glNormal3d(facet.getNormal().get(0), facet.getNormal().get(1), facet.getNormal().get(2));
 
 				// setting the position of the vertex
 				gl.glVertex3d(vertex.getPosition().get(0), vertex.getPosition().get(1), vertex.getPosition().get(2));

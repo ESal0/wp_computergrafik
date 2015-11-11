@@ -108,13 +108,13 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			Vertex v2 = f.getHalfEdge().getNext().getStartVertex();
 			Vertex v3 = f.getHalfEdge().getNext().getNext().getStartVertex();
 
-			// substract v1-v2
-			Vector3 leftSide = v1.getNormal().subtract(v2.getNormal());
-			// substract v1-v3
-			Vector3 rightSide = v1.getNormal().subtract(v3.getNormal());
+			// substract v2-v1
+			Vector3 leftSide = (v2.getPosition().subtract(v1.getPosition()));
+			// substract v3-v1
+			Vector3 rightSide = (v3.getPosition().subtract(v1.getPosition()));
 
 			// rightSide x leftSide
-			f.setNormal(leftSide.cross(rightSide));
+			f.setNormal((leftSide.cross(rightSide)).getNormalized());
 		}
 	}
 
