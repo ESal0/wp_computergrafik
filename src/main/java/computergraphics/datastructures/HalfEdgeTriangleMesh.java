@@ -6,7 +6,7 @@ import computergraphics.math.Vector3;
 
 /*
  * @Author: Eric Salomon, Christian Rambow
- * 
+ * basic triangle mesh for A2 WP Computergraphic
  */
 
 public class HalfEdgeTriangleMesh implements ITriangleMesh {
@@ -17,37 +17,49 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	@Override
 	public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
-		Vertex v1 = getVertex(vertexIndex1);
-		Vertex v2 = getVertex(vertexIndex2);
-		Vertex v3 = getVertex(vertexIndex3);
-
-		HalfEdge he1 = new HalfEdge();
-		HalfEdge he2 = new HalfEdge();
-		HalfEdge he3 = new HalfEdge();
-		he1.setStartVertex(v1);
-		he2.setStartVertex(v2);
-		he3.setStartVertex(v3);
-		he1.setNext(he2);
-		he2.setNext(he3);
-		he3.setNext(he1);
-		v1.setHalfEdge(he1);
-		v2.setHalfEdge(he2);
-		v3.setHalfEdge(he3);
-
-		halfEdges.add(he1);
-		halfEdges.add(he2);
-		halfEdges.add(he3);
+		ArrayList<HalfEdge> halfEdgeList = new ArrayList<>();
+		ArrayList<Vertex> vertexList = new ArrayList<>();
 		TriangleFacet triangle = new TriangleFacet();
-		triangle.setHalfEdge(he1);
+
+		// fill the vertexList with the vertices
+		vertexList.add(getVertex(vertexIndex1));
+		vertexList.add(getVertex(vertexIndex2));
+		vertexList.add(getVertex(vertexIndex3));
+
+		// fill the halfEdgeList with new halfEdges
+		halfEdgeList.add(new HalfEdge());
+		halfEdgeList.add(new HalfEdge());
+		halfEdgeList.add(new HalfEdge());
+
+		// counter to
+		int counter = 0;
+
+		// set the params for all halfEdges
+		for (HalfEdge e : halfEdgeList) {
+			e.setStartVertex(vertexList.get(counter));
+			e.setNext(halfEdgeList.get((counter + 1) % 3));
+			vertexList.get(counter).setHalfEdge(e);
+			e.setFacet(triangle);
+			halfEdges.add(e);
+			counter++;
+		}
+		// set one (the first) halfEdge in the facette
+		triangle.setHalfEdge(halfEdgeList.get(0));
+
+		// add the triangle to the list
 		facettes.add(triangle);
 	}
 
+	// TODO: this can be done better ("map the vertices")
 	public void setOppositeHalfEdges() {
 		for (HalfEdge e : halfEdges) {
 			for (HalfEdge o : halfEdges) {
+				// if one of the halfEdges has an opposite -> skip
+				// then, check if the halfEdges are their opposites
 				if ((e.getOpposite() == null && o.getOpposite() == null)
 						&& (e.getNext().getStartVertex() == o.getStartVertex())
 						&& o.getNext().getStartVertex() == e.getStartVertex()) {
+					// set them as opposites
 					e.setOpposite(o);
 					o.setOpposite(e);
 				}
@@ -91,14 +103,18 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	@Override
 	public void computeTriangleNormals() {
 		for (TriangleFacet f : facettes) {
+			// Get all triangles from the facette
 			Vertex v1 = f.getHalfEdge().getStartVertex();
 			Vertex v2 = f.getHalfEdge().getNext().getStartVertex();
 			Vertex v3 = f.getHalfEdge().getNext().getNext().getStartVertex();
 
-			Vector3 normal = ((v1.getNormal().subtract(v2.getNormal())).cross(v1.getNormal().subtract(v3.getNormal())))
-					.getNormalized();
+			// substract v1-v2
+			Vector3 leftSide = v1.getNormal().subtract(v2.getNormal());
+			// substract v1-v3
+			Vector3 rightSide = v1.getNormal().subtract(v3.getNormal());
 
-			f.setNormal(normal);
+			// rightSide x leftSide
+			f.setNormal(leftSide.cross(rightSide));
 		}
 	}
 

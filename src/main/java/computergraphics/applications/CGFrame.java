@@ -113,15 +113,8 @@ public class CGFrame extends AbstractCGFrame {
   private void excercise3(){
 	  ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
 	  this.getRoot().addChild(shaderNode);
-	  floorNode = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH);
-	  shaderNode.addChild(floorNode);
-	  ScaleNode scale = new ScaleNode(new Vector3(2,2,2));
-	  TranslationNode translation = new TranslationNode(new Vector3(0,0.3,0));
-	  floorNode.addChild(scale);
-	  scale.addChild(translation);
 	  HalfEdgeTriangleMeshNode triangleMeshNode = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
-	  translation.addChild(triangleMeshNode);
-	  generateTrees(15);
+	  shaderNode.addChild(triangleMeshNode);
   }
   //generates amount of trees and randomly places on Floorwidth*Floorbreadth area
   private void generateTrees(int amount){
