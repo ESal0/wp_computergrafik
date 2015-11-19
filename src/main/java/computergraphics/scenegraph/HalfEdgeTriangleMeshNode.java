@@ -3,13 +3,9 @@ package computergraphics.scenegraph;
 /*
  * @Author: Eric Salomon, Christian Rambow
  */
-import com.jogamp.opengl.GL2;
 
-import computergraphics.datastructures.HalfEdge;
-import computergraphics.datastructures.HalfEdgeTriangleMesh;
-import computergraphics.datastructures.ObjIO;
-import computergraphics.datastructures.TriangleFacet;
-import computergraphics.datastructures.Vertex;
+import com.jogamp.opengl.GL2;
+import computergraphics.datastructures.*;
 
 public class HalfEdgeTriangleMeshNode extends Node {
 
@@ -27,6 +23,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
 		// set the opposites for each halfEdge in the mesh
 		triangleMesh.setOppositeHalfEdges();
 		triangleMesh.computeTriangleNormals();
+		triangleMesh.computeVertexNormals();
 	}
 
 	private void init(GL2 gl) {
@@ -57,7 +54,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
 				Vertex vertex = halfEdge.getStartVertex();
 
 				// setting the normal of the vertex
-				gl.glNormal3d(facet.getNormal().get(0), facet.getNormal().get(1), facet.getNormal().get(2));
+				gl.glNormal3d(vertex.getNormal().get(0), vertex.getNormal().get(1), vertex.getNormal().get(2));
 
 				// setting the position of the vertex
 				gl.glVertex3d(vertex.getPosition().get(0), vertex.getPosition().get(1), vertex.getPosition().get(2));

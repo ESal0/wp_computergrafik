@@ -1,8 +1,8 @@
 package computergraphics.datastructures;
 
-import java.util.ArrayList;
-
 import computergraphics.math.Vector3;
+
+import java.util.ArrayList;
 
 /*
  * @Author: Eric Salomon, Christian Rambow
@@ -13,7 +13,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	private ArrayList<HalfEdge> halfEdges = new ArrayList<>();
 	private ArrayList<Vertex> vertices = new ArrayList<>();
-	private ArrayList<TriangleFacet> facettes = new ArrayList<>();
+    private ArrayList<TriangleFacet> facets = new ArrayList<>();
 
 	@Override
 	public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
@@ -43,12 +43,12 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			halfEdges.add(e);
 			counter++;
 		}
-		// set one (the first) halfEdge in the facette
-		triangle.setHalfEdge(halfEdgeList.get(0));
+        // set one (the first) halfEdge in the facet
+        triangle.setHalfEdge(halfEdgeList.get(0));
 
 		// add the triangle to the list
-		facettes.add(triangle);
-	}
+        facets.add(triangle);
+    }
 
 	// TODO: this can be done better ("map the vertices")
 	public void setOppositeHalfEdges() {
@@ -75,8 +75,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	@Override
 	public int getNumberOfTriangles() {
-		return facettes.size();
-	}
+        return facets.size();
+    }
 
 	@Override
 	public int getNumberOfVertices() {
@@ -90,22 +90,22 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	@Override
 	public TriangleFacet getFacet(int facetIndex) {
-		return facettes.get(facetIndex);
-	}
+        return facets.get(facetIndex);
+    }
 
 	@Override
 	public void clear() {
 		halfEdges.clear();
 		vertices.clear();
-		facettes.clear();
-	}
+        facets.clear();
+    }
 
 	@Override
 	public void computeTriangleNormals() {
-		for (TriangleFacet f : facettes) {
-			// Get all triangles from the facette
-			Vertex v1 = f.getHalfEdge().getStartVertex();
-			Vertex v2 = f.getHalfEdge().getNext().getStartVertex();
+        for (TriangleFacet f : facets) {
+            // Get all triangles from the facette
+            Vertex v1 = f.getHalfEdge().getStartVertex();
+            Vertex v2 = f.getHalfEdge().getNext().getStartVertex();
 			Vertex v3 = f.getHalfEdge().getNext().getNext().getStartVertex();
 
 			// substract v2-v1
@@ -118,16 +118,29 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		}
 	}
 
-	@Override
-	public void setTextureFilename(String filename) {
-		// TODO Auto-generated method stub
+    @Override
+    public void computeVertexNormals() {
+        for (Vertex v : vertices) {
+            Vector3 normal = new Vector3(0, 0, 0);
+            HalfEdge current = v.getHalfEdge();
+            do {
+                normal = normal.add(current.getFacet().getNormal());
+                current = current.getOpposite().getNext();
+            } while (current != v.getHalfEdge());
+            v.setNormal(normal.getNormalized());
+        }
+    }
 
-	}
+	@Override
+    public String getTextureFilename() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 	@Override
-	public String getTextureFilename() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setTextureFilename(String filename) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
