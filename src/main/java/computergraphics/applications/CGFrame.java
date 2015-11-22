@@ -70,7 +70,7 @@ public class CGFrame extends AbstractCGFrame {
 		this.getRoot().addChild(shaderNode);
 		TranslationNode translation = new TranslationNode(new Vector3(0, 0.3, 0));
 		shaderNode.addChild(translation);
-		triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\sphere.obj");
+		triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
 		translation.addChild(triangleMesh);
 
 		FloorNode floor = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH);

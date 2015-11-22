@@ -3,8 +3,6 @@ package computergraphics.datastructures;
 import computergraphics.math.Vector3;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /*
  * @Author: Eric Salomon, Christian Rambow
@@ -16,7 +14,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     private ArrayList<HalfEdge> halfEdges = new ArrayList<>();
     private ArrayList<Vertex> vertices = new ArrayList<>();
     private ArrayList<TriangleFacet> facets = new ArrayList<>();
-    private double alpha = 0.3;
+    private double alpha = 0.5;
     private boolean update = true;
 
     @Override
@@ -148,38 +146,24 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     }
 
     public void applyLaplaceFilter() {
-        //  ArrayList<Vertex> verticesAfterFilter = vertices;
-        HashMap<Integer, Vector3> piMap = new HashMap<>();
+        ArrayList<Vertex> verticesAfterFilter = vertices;
+
         for (int i = 0; i < vertices.size(); i++) {
             Vertex v = vertices.get(i);
-            //Vertex vNew = verticesAfterFilter.get(i);
+            Vertex vNew = verticesAfterFilter.get(i);
             Vector3 ci = new Vector3();
+
             ArrayList<Vertex> neighbors = getAllNeighbors(v);
             for (Vertex neighbor : neighbors) {
                 ci = ci.add(neighbor.getPosition());
             }
-
-            ci = ci.multiply(1 / neighbors.size());
+            ci = ci.multiply(1.0 / neighbors.size());
             ci = ci.multiply(1 - alpha);
-            Vector3 pi = (v.getPosition().multiply(alpha));
-            piMap.put(i, pi.add(ci));
-            
-            /*
-            System.out.println("Old pos: " + vNew.getPosition());
-            System.out.println("pi: " + pi);
-            vNew.getPosition().set(0, pi.get(0));
-            vNew.getPosition().set(1, pi.get(1));
-            vNew.getPosition().set(2, pi.get(2));
-            System.out.println("New pos: " + vNew.getPosition());*/
+            Vector3 pi = (v.getPosition().multiply(alpha)).add(ci);
+            vNew.getPosition().copy(pi);
         }
 
-        for (Map.Entry e : piMap.entrySet()) {
-            Vertex vertex = vertices.get((Integer) e.getKey());
-            Vector3 vector = (Vector3) e.getValue();
-            vertex.getPosition().copy(vector);
-        }
-
-        //this.vertices = verticesAfterFilter;
+        this.vertices = verticesAfterFilter;
         computeTriangleNormals();
         computeVertexNormals();
         setUpdate(true);
