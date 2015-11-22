@@ -6,20 +6,15 @@
  */
 package computergraphics.framework;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLJPanel;
 import com.jogamp.opengl.util.FPSAnimator;
-
 import computergraphics.math.Vector3;
+
+import java.awt.event.*;
 
 /**
  * This class represents a view for 3D content.
@@ -79,7 +74,6 @@ public class View3D extends GLJPanel implements GLEventListener, MouseListener, 
     addGLEventListener(this);
     addMouseListener(this);
     addMouseMotionListener(this);
-    addKeyListener(this);
     addKeyListener(this);
 
     setSize(WIDGET_WIDTH, WIDGET_HEIGHT);

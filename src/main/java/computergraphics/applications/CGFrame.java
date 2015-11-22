@@ -7,19 +7,11 @@
 
 package computergraphics.applications;
 
+import com.jogamp.newt.event.KeyEvent;
 import computergraphics.framework.AbstractCGFrame;
 import computergraphics.math.Vector3;
-import computergraphics.scenegraph.FloorNode;
-import computergraphics.scenegraph.HalfEdgeTriangleMeshNode;
-import computergraphics.scenegraph.HelicopterNode;
-import computergraphics.scenegraph.RotationNode;
-import computergraphics.scenegraph.ScaleNode;
-import computergraphics.scenegraph.ShaderNode;
+import computergraphics.scenegraph.*;
 import computergraphics.scenegraph.ShaderNode.ShaderType;
-import computergraphics.scenegraph.SingleTriangleNode;
-import computergraphics.scenegraph.SphereNode;
-import computergraphics.scenegraph.TranslationNode;
-import computergraphics.scenegraph.TreeNode;
 
 /**
  * Application for the first exercise.
@@ -37,6 +29,7 @@ public class CGFrame extends AbstractCGFrame {
 	private FloorNode floorNode;
 	private TranslationNode helicopterTranslation;
 	private HelicopterNode helicopter;
+	private HalfEdgeTriangleMeshNode triangleMesh;
 
 	/**
 	 * Constructor.
@@ -46,19 +39,30 @@ public class CGFrame extends AbstractCGFrame {
 		excercise3();
 	}
 
+	/**
+	 * Program entry point.
+	 */
+	public static void main(String[] args) {
+		// The timer ticks every 1000 ms.
+		new CGFrame(1000);
+	}
+
 	/*
 	 * (nicht-Javadoc)
-	 * 
+	 *
 	 * @see computergrafik.framework.ComputergrafikFrame#timerTick()
 	 */
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
-		//helicopter.setRotatorAngle(helicopter.getRotatorAngle() + 50);
 	}
 
 	public void keyPressed(int keyCode) {
 		System.out.println("Key pressed: " + (char) keyCode);
+		if (keyCode == KeyEvent.VK_S) {
+			System.out.println(true);
+			triangleMesh.applyFilter();
+		}
 	}
 
 	private void excercise3() {
@@ -66,8 +70,8 @@ public class CGFrame extends AbstractCGFrame {
 		this.getRoot().addChild(shaderNode);
 		TranslationNode translation = new TranslationNode(new Vector3(0, 0.3, 0));
 		shaderNode.addChild(translation);
-		HalfEdgeTriangleMeshNode triangleMeshNode = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
-		translation.addChild(triangleMeshNode);
+		triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\sphere.obj");
+		translation.addChild(triangleMesh);
 
 		FloorNode floor = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH);
 		//shaderNode.addChild(floor);
@@ -130,13 +134,5 @@ public class CGFrame extends AbstractCGFrame {
 		// Sphere
 		SphereNode sphereNode = new SphereNode(0.25, 20);
 		shaderNode.addChild(sphereNode);
-	}
-
-	/**
-	 * Program entry point.
-	 */
-	public static void main(String[] args) {
-		// The timer ticks every 1000 ms.
-		new CGFrame(1000);
 	}
 }
