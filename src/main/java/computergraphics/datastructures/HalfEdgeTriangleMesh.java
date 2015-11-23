@@ -135,13 +135,11 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
     @Override
     public String getTextureFilename() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void setTextureFilename(String filename) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -152,7 +150,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
             Vertex v = vertices.get(i);
             Vertex vNew = verticesAfterFilter.get(i);
             Vector3 ci = new Vector3();
-
             ArrayList<Vertex> neighbors = getAllNeighbors(v);
             for (Vertex neighbor : neighbors) {
                 ci = ci.add(neighbor.getPosition());
@@ -167,6 +164,62 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
         computeTriangleNormals();
         computeVertexNormals();
         setUpdate(true);
+    }
+
+    public void calculateCurvature() {
+        double minCurvature = Double.MAX_VALUE;
+        double maxCurvature = 0.0;
+
+        for (Vertex v : vertices) {
+            ArrayList<TriangleFacet> adjacentTriangles = getAllAdjacentTriangles(v);
+            double totalAreaOfFacets = 0.0;
+
+            double buffer = 0.0;
+            for (TriangleFacet triangle : adjacentTriangles) {
+                totalAreaOfFacets += triangle.getArea();
+
+                double part1 = v.getPosition().multiply(triangle.getCentroid());
+                double part2 = v.getPosition().getNorm() * triangle.getNormal().getNorm();
+                //System.out.println(part1 + "/" + part2);
+
+                buffer += Math.acos(part1 / part2);
+                //buffer += Math.acos((v.getPosition().multiply(triangle.getCentroid())) / (v.getPosition().getNorm() * triangle.getNormal().getNorm()));
+            }
+
+            double gamma = (1.0 / adjacentTriangles.size()) * buffer;
+            double curvature = gamma / totalAreaOfFacets;
+
+            if (curvature < minCurvature) {
+                minCurvature = curvature;
+                System.out.println("New min " + curvature);
+            } else if (curvature > maxCurvature) {
+                maxCurvature = curvature;
+                System.out.println("New max " + curvature);
+            }
+            //System.out.println(curvature);
+            v.setCurvature(curvature);
+        }
+
+        for (Vertex v : vertices) {
+            double factor = (v.getCurvature() - minCurvature) / (maxCurvature - minCurvature);
+            //Vector3 color = new Vector3(0, 1, 0).multiply((v.getCurvature() - minCurvature) / (maxCurvature - minCurvature));
+            Vector3 color = new Vector3(0, 1, 0).multiply(factor);
+            //System.out.println("factor: " + factor);
+            v.setColor(color);
+        }
+
+        System.out.println("min: " + minCurvature + " max: " + maxCurvature);
+    }
+
+    private ArrayList<TriangleFacet> getAllAdjacentTriangles(Vertex v) {
+        ArrayList<TriangleFacet> triangles = new ArrayList<>();
+        HalfEdge current = v.getHalfEdge();
+        do {
+            triangles.add(current.getFacet());
+            current = current.getOpposite().getNext();
+        } while (current != v.getHalfEdge());
+
+        return triangles;
     }
 
     private ArrayList<Vertex> getAllNeighbors(Vertex v) {

@@ -27,6 +27,7 @@ public class HalfEdgeTriangleMeshNode extends Node {
         triangleMesh.setOppositeHalfEdges();
         triangleMesh.computeTriangleNormals();
         triangleMesh.computeVertexNormals();
+        triangleMesh.calculateCurvature();
     }
 
     private void init(GL2 gl) {
@@ -46,7 +47,6 @@ public class HalfEdgeTriangleMeshNode extends Node {
             // Get the halfEdge of the facet
             HalfEdge halfEdge = triangleMesh.getFacet(i).getHalfEdge();
             // Color = brown(-ish)
-            gl.glColor3d(0.6, 0.4, 0.2);
 
             // Counter for limiting reading 3 halfEdges
             int j = 0;
@@ -54,6 +54,8 @@ public class HalfEdgeTriangleMeshNode extends Node {
             while (j < 3) {
                 // Get the vertex of the halfEdge
                 Vertex vertex = halfEdge.getStartVertex();
+
+                gl.glColor3d(vertex.getColor().get(0), vertex.getColor().get(1), vertex.getColor().get(2));
 
                 // setting the normal of the vertex
                 gl.glNormal3d(vertex.getNormal().get(0), vertex.getNormal().get(1), vertex.getNormal().get(2));
@@ -84,5 +86,9 @@ public class HalfEdgeTriangleMeshNode extends Node {
 
     public void applyFilter() {
         triangleMesh.applyLaplaceFilter();
+    }
+
+    public void calculateCurvature() {
+        triangleMesh.calculateCurvature();
     }
 }
