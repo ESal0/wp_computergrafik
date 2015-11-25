@@ -127,11 +127,17 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     public void computeVertexNormals() {
         for (Vertex v : vertices) {
             Vector3 normal = new Vector3(0, 0, 0);
+            //Starting Half-Edge
             HalfEdge current = v.getHalfEdge();
             do {
+                //adding all normals of the adjacent triangles
                 normal = normal.add(current.getFacet().getNormal());
+
+                //get the "next" outgoing halfedge of the vertex
                 current = current.getOpposite().getNext();
             } while (current != v.getHalfEdge());
+
+            //set the normal (normalized)
             v.setNormal(normal.getNormalized());
         }
     }
@@ -143,26 +149,30 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
     @Override
     public void setTextureFilename(String filename) {
-
     }
 
     public void applyLaplaceFilter() {
+        //Map with key = index of vertex, value = new vector
         HashMap<Integer, Vector3> map = new HashMap<>();
 
         for (int i = 0; i < vertices.size(); i++) {
             Vertex v = vertices.get(i);
             Vector3 ci = new Vector3();
+
             ArrayList<Vertex> neighbors = getAllNeighbors(v);
             for (Vertex neighbor : neighbors) {
+                //Adding the position of all neighbours
                 ci = ci.add(neighbor.getPosition());
             }
+
+
             ci = ci.multiply(1.0 / neighbors.size());
             ci = ci.multiply(1 - alpha);
             Vector3 pi = (v.getPosition().multiply(alpha)).add(ci);
             map.put(i, pi);
         }
 
-        for(Map.Entry e : map.entrySet()){
+        for (Map.Entry e : map.entrySet()) {
             vertices.get((Integer) e.getKey()).getPosition().copy((Vector3) e.getValue());
         }
 
@@ -183,8 +193,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
             for (TriangleFacet triangle : adjacentTriangles) {
                 totalAreaOfFacets += triangle.getArea();
 
-                double part1 = v.getPosition().multiply(triangle.getCentroid());
-                double part2 = v.getPosition().getNorm() * triangle.getNormal().getNorm();
+                double part1 = v.getNormal().multiply(triangle.getNormal());
+                double part2 = 1;//v.getPosition().getNorm() * triangle.getNormal().getNorm();
 
                 buffer += Math.acos(part1 / part2);
             }
@@ -197,14 +207,12 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
             } else if (curvature > maxCurvature) {
                 maxCurvature = curvature;
             }
-            //System.out.println(curvature);
             v.setCurvature(curvature);
         }
 
         for (Vertex v : vertices) {
             double factor = (v.getCurvature() - minCurvature) / (maxCurvature - minCurvature);
-            Vector3 color = new Vector3(1, 1*factor, 0);
-            //System.out.println("factor: " + factor);
+            Vector3 color = new Vector3(0, 1 * factor, 0);
             v.setColor(color);
         }
     }
