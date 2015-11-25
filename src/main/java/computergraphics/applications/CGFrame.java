@@ -69,7 +69,7 @@ public class CGFrame extends AbstractCGFrame {
     private void excercise3() {
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
-        triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\cube.obj");
+        triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
         shaderNode.addChild(triangleMesh);
     }
 

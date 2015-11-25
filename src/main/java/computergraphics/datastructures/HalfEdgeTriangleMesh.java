@@ -1,8 +1,11 @@
 package computergraphics.datastructures;
 
+import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry;
 import computergraphics.math.Vector3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * @Author: Eric Salomon, Christian Rambow
@@ -144,11 +147,10 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     }
 
     public void applyLaplaceFilter() {
-        ArrayList<Vertex> verticesAfterFilter = vertices;
+        HashMap<Integer, Vector3> map = new HashMap<>();
 
         for (int i = 0; i < vertices.size(); i++) {
             Vertex v = vertices.get(i);
-            Vertex vNew = verticesAfterFilter.get(i);
             Vector3 ci = new Vector3();
             ArrayList<Vertex> neighbors = getAllNeighbors(v);
             for (Vertex neighbor : neighbors) {
@@ -157,10 +159,13 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
             ci = ci.multiply(1.0 / neighbors.size());
             ci = ci.multiply(1 - alpha);
             Vector3 pi = (v.getPosition().multiply(alpha)).add(ci);
-            vNew.getPosition().copy(pi);
+            map.put(i, pi);
         }
 
-        this.vertices = verticesAfterFilter;
+        for(Map.Entry e : map.entrySet()){
+            vertices.get((Integer) e.getKey()).getPosition().copy((Vector3) e.getValue());
+        }
+
         computeTriangleNormals();
         computeVertexNormals();
         setUpdate(true);
@@ -180,10 +185,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
                 double part1 = v.getPosition().multiply(triangle.getCentroid());
                 double part2 = v.getPosition().getNorm() * triangle.getNormal().getNorm();
-                //System.out.println(part1 + "/" + part2);
 
                 buffer += Math.acos(part1 / part2);
-                //buffer += Math.acos((v.getPosition().multiply(triangle.getCentroid())) / (v.getPosition().getNorm() * triangle.getNormal().getNorm()));
             }
 
             double gamma = (1.0 / adjacentTriangles.size()) * buffer;
@@ -191,10 +194,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
             if (curvature < minCurvature) {
                 minCurvature = curvature;
-                System.out.println("New min " + curvature);
             } else if (curvature > maxCurvature) {
                 maxCurvature = curvature;
-                System.out.println("New max " + curvature);
             }
             //System.out.println(curvature);
             v.setCurvature(curvature);
@@ -202,13 +203,10 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
         for (Vertex v : vertices) {
             double factor = (v.getCurvature() - minCurvature) / (maxCurvature - minCurvature);
-            //Vector3 color = new Vector3(0, 1, 0).multiply((v.getCurvature() - minCurvature) / (maxCurvature - minCurvature));
-            Vector3 color = new Vector3(0, 1, 0).multiply(factor);
+            Vector3 color = new Vector3(1, 1*factor, 0);
             //System.out.println("factor: " + factor);
             v.setColor(color);
         }
-
-        System.out.println("min: " + minCurvature + " max: " + maxCurvature);
     }
 
     private ArrayList<TriangleFacet> getAllAdjacentTriangles(Vertex v) {
