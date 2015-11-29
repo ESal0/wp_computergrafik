@@ -8,10 +8,14 @@
 package computergraphics.applications;
 
 import com.jogamp.newt.event.KeyEvent;
+import computergraphics.file.reader.CGFileReader;
+import computergraphics.file.reader.model.CasesLookupTable;
 import computergraphics.framework.AbstractCGFrame;
 import computergraphics.math.Vector3;
 import computergraphics.scenegraph.*;
 import computergraphics.scenegraph.ShaderNode.ShaderType;
+
+import java.io.File;
 
 /**
  * Application for the first exercise.
@@ -44,6 +48,11 @@ public class CGFrame extends AbstractCGFrame {
      */
     public static void main(String[] args) {
         // The timer ticks every 1000 ms.
+
+        //CLT Reader Example
+        CGFileReader cgfr = new CGFileReader();
+        CasesLookupTable clt = cgfr.readCasesLookupTableByRelativePath("\\CasesLookupTables\\clt.txt");
+
         new CGFrame(1000);
     }
 
