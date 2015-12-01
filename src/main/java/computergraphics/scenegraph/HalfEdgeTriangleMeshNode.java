@@ -9,6 +9,10 @@ import computergraphics.datastructures.HalfEdge;
 import computergraphics.datastructures.HalfEdgeTriangleMesh;
 import computergraphics.datastructures.ObjIO;
 import computergraphics.datastructures.Vertex;
+import computergraphics.math.ImplicitFunction;
+import computergraphics.math.Vector3;
+
+import java.util.List;
 
 public class HalfEdgeTriangleMeshNode extends Node {
 
@@ -28,6 +32,22 @@ public class HalfEdgeTriangleMeshNode extends Node {
         triangleMesh.computeTriangleNormals();
         triangleMesh.computeVertexNormals();
         triangleMesh.calculateCurvature();
+    }
+
+    public HalfEdgeTriangleMeshNode(List<Vector3> points, List<Double> values) {
+        triangleMesh = new HalfEdgeTriangleMesh();
+        triangleMesh.createTriangles(points, values);
+
+       /* triangleMesh.setOppositeHalfEdges();
+        triangleMesh.computeTriangleNormals();
+        triangleMesh.computeVertexNormals();*/
+
+    }
+
+    public HalfEdgeTriangleMeshNode(ImplicitFunction function) {
+        triangleMesh = new HalfEdgeTriangleMesh();
+        triangleMesh.createMeshFromImplicitFunction(function);
+
     }
 
     private void init(GL2 gl) {
