@@ -68,12 +68,12 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     }
 
     public void createTriangles(List<Vector3> points, List<Double> values) {
-        double iso = 0.0;
+        double iso = 1.0;
         int caseIndex = 0;
         int bit = 1;
 
         for (Double value : values) {
-            if (value == 1) {
+            if (value > iso) {
                 caseIndex += bit;
             }
             bit *= 2;

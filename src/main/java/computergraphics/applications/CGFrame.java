@@ -71,7 +71,7 @@ public class CGFrame extends AbstractCGFrame {
         ImplicitFunction function = new ImplicitFunction();
         //function.torus(0.5, 1);
         //function.sphere(1);
-        function.superQuadratic(2, 2, 2, 0.1, 0.1);
+        function.superQuadratic(0.1, 0.4, 0.3, 0.5, 0.5);
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
         shaderNode.addChild(new HalfEdgeTriangleMeshNode(function));
