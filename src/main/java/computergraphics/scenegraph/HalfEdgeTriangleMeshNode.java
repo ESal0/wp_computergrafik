@@ -10,15 +10,13 @@ import computergraphics.datastructures.HalfEdgeTriangleMesh;
 import computergraphics.datastructures.ObjIO;
 import computergraphics.datastructures.Vertex;
 import computergraphics.math.ImplicitFunction;
-import computergraphics.math.Vector3;
-
-import java.util.List;
 
 public class HalfEdgeTriangleMeshNode extends Node {
 
     private HalfEdgeTriangleMesh triangleMesh;
     // GL-intern index of the DisplayList
     private int meshID = 0;
+    private HalfEdgeTriangleMesh mesh;
 
     public HalfEdgeTriangleMeshNode(String path) {
         triangleMesh = new HalfEdgeTriangleMesh();
@@ -34,19 +32,14 @@ public class HalfEdgeTriangleMeshNode extends Node {
         triangleMesh.calculateCurvature();
     }
 
-    public HalfEdgeTriangleMeshNode(List<Vector3> points, List<Double> values) {
-        triangleMesh = new HalfEdgeTriangleMesh();
-        triangleMesh.createTriangles(points, values);
-
-       /* triangleMesh.setOppositeHalfEdges();
-        triangleMesh.computeTriangleNormals();
-        triangleMesh.computeVertexNormals();*/
-
-    }
-
     public HalfEdgeTriangleMeshNode(ImplicitFunction function) {
         triangleMesh = new HalfEdgeTriangleMesh();
         triangleMesh.createMeshFromImplicitFunction(function);
+
+        triangleMesh.setOppositeHalfEdges();
+        triangleMesh.computeTriangleNormals();
+        triangleMesh.computeVertexNormals();
+        triangleMesh.calculateCurvature();
 
     }
 
@@ -110,5 +103,9 @@ public class HalfEdgeTriangleMeshNode extends Node {
 
     public void calculateCurvature() {
         triangleMesh.calculateCurvature();
+    }
+
+    public HalfEdgeTriangleMesh getMesh() {
+        return mesh;
     }
 }

@@ -27,6 +27,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     @Override
     public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
         //System.out.println("Creating triangle between: " + vertexIndex1 + "," + vertexIndex2 + "," + vertexIndex3);
+        //System.out.println("Still creating..: ");
         ArrayList<HalfEdge> halfEdgeList = new ArrayList<>();
         ArrayList<Vertex> vertexList = new ArrayList<>();
         TriangleFacet triangle = new TriangleFacet();
@@ -67,89 +68,134 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
     }
 
     public void createTriangles(List<Vector3> points, List<Double> values) {
-        double iso = 5.0;
-        //int cases[] = {0, 0, 0, 0, 0, 0, 0, 0};
+        double iso = 0.0;
         int caseIndex = 0;
         int bit = 1;
 
         for (Double value : values) {
-            if (value > iso) {
-                //cases[i] = 1;
+            if (value == 1) {
                 caseIndex += bit;
             }
             bit *= 2;
         }
 
-        //System.out.println("CaseIndex: " + caseIndex);
+        System.out.println("CaseIndex: " + caseIndex);
         ArrayList<Integer> indices = new ArrayList<>();
 
         for (int i = caseIndex * 15; i <= (caseIndex + 1) * 15 - 1; i++) {
             indices.add(lookupTable.get(i));
         }
-
+        ArrayList<Integer> triangleIds = new ArrayList<>();
         for (Integer index : indices) {
+
             Vector3 p1 = null;
             Vector3 p2 = null;
+            double v1 = 0.0;
+            double v2 = 0.0;
+
             switch (index) {
                 case 0:
                     p1 = points.get(0);
                     p2 = points.get(1);
+                    v1 = values.get(0);
+                    v2 = values.get(1);
                     break;
                 case 1:
                     p1 = points.get(1);
                     p2 = points.get(2);
+                    v1 = values.get(1);
+                    v2 = values.get(2);
                     break;
                 case 2:
-                    p1 = points.get(2);
-                    p2 = points.get(3);
+                    p1 = points.get(3);
+                    p2 = points.get(2);
+                    v1 = values.get(3);
+                    v2 = values.get(2);
                     break;
                 case 3:
                     p1 = points.get(0);
                     p2 = points.get(3);
+                    v1 = values.get(0);
+                    v2 = values.get(3);
                     break;
                 case 4:
                     p1 = points.get(4);
                     p2 = points.get(5);
+                    v1 = values.get(4);
+                    v2 = values.get(5);
                     break;
                 case 5:
                     p1 = points.get(5);
                     p2 = points.get(6);
+                    v1 = values.get(5);
+                    v2 = values.get(6);
                     break;
                 case 6:
-                    p1 = points.get(6);
-                    p2 = points.get(7);
+                    p1 = points.get(7);
+                    p2 = points.get(6);
+                    v1 = values.get(7);
+                    v2 = values.get(6);
                     break;
                 case 7:
                     p1 = points.get(4);
                     p2 = points.get(7);
+                    v1 = values.get(4);
+                    v2 = values.get(7);
                     break;
                 case 8:
                     p1 = points.get(0);
                     p2 = points.get(4);
+                    v1 = values.get(0);
+                    v2 = values.get(4);
                     break;
                 case 9:
                     p1 = points.get(1);
                     p2 = points.get(5);
+                    v1 = values.get(1);
+                    v2 = values.get(5);
                     break;
                 case 10:
                     p1 = points.get(3);
                     p2 = points.get(7);
+                    v1 = values.get(3);
+                    v2 = values.get(7);
                     break;
                 case 11:
-                    p1 = points.get(6);
-                    p2 = points.get(2);
+                    p1 = points.get(2);
+                    p2 = points.get(6);
+                    v1 = values.get(2);
+                    v2 = values.get(6);
                     break;
                 default:
                     break;
             }
             if (p1 != null && p2 != null) {
-                vertices.add(new Vertex(p1.add(p2).multiply(0.5)));
+                double t = (iso - v1) / (v2 - v1);
+                Vector3 position = p1.multiply(1 - t).add(p2.multiply(t));
+                triangleIds.add(getVertexAt(position));
+            }
+            if (triangleIds.size() == 3) {
+                addTriangle(triangleIds.get(0), triangleIds.get(1), triangleIds.get(2));
+                triangleIds.clear();
             }
         }
+    }
 
-        for (int f = 0; f < vertices.size(); f += 3) {
-            addTriangle(f, f + 1, f + 2);
+    private int getVertexAt(Vector3 position) {
+        int vertexId = -1;
+
+        for (int i = 0; i < vertices.size(); i++) {
+            if (vertices.get(i).getPosition().equals(position)) {
+                vertexId = i;
+                break;
+            }
         }
+        if (vertexId == -1) {
+            vertices.add(new Vertex(position, new Vector3(0, 0, 0), new Vector3(0.5, 0.5, 0.5)));
+            vertexId = vertices.size() - 1;
+        }
+
+        return vertexId;
     }
 
     // TODO: this can be done better ("map the vertices")
@@ -262,7 +308,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
                 ci = ci.add(neighbor.getPosition());
             }
 
-
             ci = ci.multiply(1.0 / neighbors.size());
             ci = ci.multiply(1 - alpha);
             Vector3 pi = (v.getPosition().multiply(alpha)).add(ci);
@@ -290,10 +335,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
             for (TriangleFacet triangle : adjacentTriangles) {
                 totalAreaOfFacets += triangle.getArea();
 
-                double part1 = v.getNormal().multiply(triangle.getNormal());
-                double part2 = 1;//v.getPosition().getNorm() * triangle.getNormal().getNorm();
-
-                buffer += Math.acos(part1 / part2);
+                buffer += Math.acos(v.getNormal().multiply(triangle.getNormal()));
             }
 
             double gamma = (1.0 / adjacentTriangles.size()) * buffer;

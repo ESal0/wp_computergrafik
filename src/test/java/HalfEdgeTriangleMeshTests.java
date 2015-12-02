@@ -1,6 +1,7 @@
 import computergraphics.datastructures.HalfEdge;
 import computergraphics.datastructures.HalfEdgeTriangleMesh;
 import computergraphics.datastructures.ObjIO;
+import computergraphics.math.ImplicitFunction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,8 +19,12 @@ public class HalfEdgeTriangleMeshTests {
     @Before
     public void init() {
         io = new ObjIO();
+        ImplicitFunction function = new ImplicitFunction();
+        function.torus(0.2, 0.5);
         mesh = new HalfEdgeTriangleMesh();
-        io.einlesen("meshes\\cow.obj", mesh);
+        mesh.createMeshFromImplicitFunction(function);
+        //io.einlesen("meshes\\cow.obj", mesh);
+
         mesh.setOppositeHalfEdges();
         mesh.computeTriangleNormals();
     }

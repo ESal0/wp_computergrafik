@@ -68,30 +68,13 @@ public class CGFrame extends AbstractCGFrame {
     }
 
     private void excercise4() {
-        /*ArrayList<Vector3> points = new ArrayList<>();
-        ArrayList<Double> values = new ArrayList<>();
-
-        points.add(new Vector3(0,0,0));
-        points.add(new Vector3(2,0,0));
-        points.add(new Vector3(2,2,0));
-        points.add(new Vector3(0,2,0));
-        points.add(new Vector3(0,0,2));
-        points.add(new Vector3(2,0,2));
-        points.add(new Vector3(2,2,0));
-        points.add(new Vector3(2,2,2));
-
-        values.add(0.0);
-        values.add(1.0);
-        values.add(0.0);
-        values.add(0.0);
-        values.add(0.0);
-        values.add(0.0);
-        values.add(0.0);
-        values.add(0.0);*/
-
         ImplicitFunction function = new ImplicitFunction();
-        function.sphere(1);
-        this.getRoot().addChild(new HalfEdgeTriangleMeshNode(function));
+        //function.torus(0.5, 1);
+        //function.sphere(1);
+        function.superQuadratic(2, 2, 2, 0.1, 0.1);
+        ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
+        this.getRoot().addChild(shaderNode);
+        shaderNode.addChild(new HalfEdgeTriangleMeshNode(function));
     }
 
     private void excercise3() {

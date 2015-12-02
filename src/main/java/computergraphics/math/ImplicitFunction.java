@@ -27,7 +27,6 @@ public class ImplicitFunction {
             for (int y = 0; y < 25; y++) {
                 for (int x = 0; x < 25; x++) {
                     marchingCubes.add(new MarchingCube(nextStart));
-                    //System.out.println("NextStart: "+nextStart);
                     nextStart = nextStart.add(new Vector3(0.16, 0, 0));
                 }
                 nextStart = nextStart.add(new Vector3(-4.0, 0.16, 0));
@@ -36,14 +35,35 @@ public class ImplicitFunction {
         }
     }
 
-    public ArrayList<MarchingCube> sphere(double radius) {
+    public void sphere(double radius) {
         for (MarchingCube m : marchingCubes) {
             for (Vector3 v : m.getPoints()) {
                 double value = Math.pow(v.get(0), 2) + Math.pow(v.get(1), 2) + Math.pow(v.get(2), 2) - Math.pow(radius, 2);
                 m.addValue(value);
             }
         }
-        return marchingCubes;
+    }
+
+    public void torus(double innerRadius, double outerRadius) {
+        for (MarchingCube m : marchingCubes) {
+            for (Vector3 v : m.getPoints()) {
+                double value = Math.pow(Math.pow(v.get(0), 2) + Math.pow(v.get(1), 2) + Math.pow(v.get(2), 2)
+                        + Math.pow(outerRadius, 2) - Math.pow(innerRadius, 2), 2)
+                        - 4 * Math.pow(outerRadius, 2) * (Math.pow(v.get(0), 2) + Math.pow(v.get(1), 2));
+                m.addValue(value);
+            }
+        }
+    }
+
+    public void superQuadratic(double expansionX, double expansionY, double expansionZ, double e1, double e2) {
+        for (MarchingCube m : marchingCubes) {
+            for (Vector3 v : m.getPoints()) {
+                double value = Math.pow(Math.pow(Math.pow(v.get(0) / expansionX, 2 / e2)
+                        + Math.pow(v.get(1) / expansionY, 2 / e2), e2 / e1)
+                        + Math.pow(v.get(2) / expansionZ, 2 / e1), e1 / 2);
+                m.addValue(value);
+            }
+        }
     }
 
     public ArrayList<MarchingCube> getMarchingCubes() {
