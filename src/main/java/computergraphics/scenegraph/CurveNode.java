@@ -33,6 +33,7 @@ public class CurveNode extends Node {
         double i = 0;
         double resolution = 1 / (double) this.resolution;
         gl.glBegin(GL.GL_LINE_STRIP);
+        gl.glLineWidth(2.0f);
         while (i <= 1) {
             Vector3 v = curve.evaluate(i);
             System.out.println("vector is: " + v);

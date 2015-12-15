@@ -25,14 +25,14 @@ public class MonomialCurve extends AbstractCurve {
             throw new IllegalArgumentException("value must be between 0 and 1, but was " + val);
         }
 
-        Vector3 res = new Vector3();
+        Vector3 res = new Vector3(0, 0, 0);
 
         for (int i = 0; i < controlPoints.size(); i++) {
             double base = Math.pow(val, i);
-            System.out.println(base);
-            res.add(controlPoints.get(i).multiply(base));
-
+            //System.out.println("base: "+base+"  buffer: " +controlPoints.get(i).multiply(base) +"\n------------");
+            res = res.add(controlPoints.get(i).multiply(base));
         }
+        //System.out.println("res: "+res);
         return res;
     }
 }
