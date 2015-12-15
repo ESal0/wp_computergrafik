@@ -16,7 +16,6 @@ public class HalfEdgeTriangleMeshNode extends Node {
     private HalfEdgeTriangleMesh triangleMesh;
     // GL-intern index of the DisplayList
     private int meshID = 0;
-    private HalfEdgeTriangleMesh mesh;
 
     public HalfEdgeTriangleMeshNode(String path) {
         triangleMesh = new HalfEdgeTriangleMesh();
@@ -106,6 +105,6 @@ public class HalfEdgeTriangleMeshNode extends Node {
     }
 
     public HalfEdgeTriangleMesh getMesh() {
-        return mesh;
+        return triangleMesh;
     }
 }

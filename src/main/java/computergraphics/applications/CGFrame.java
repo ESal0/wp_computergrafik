@@ -10,9 +10,12 @@ package computergraphics.applications;
 import com.jogamp.newt.event.KeyEvent;
 import computergraphics.framework.AbstractCGFrame;
 import computergraphics.math.ImplicitFunction;
+import computergraphics.math.MonomialCurve;
 import computergraphics.math.Vector3;
 import computergraphics.scenegraph.*;
 import computergraphics.scenegraph.ShaderNode.ShaderType;
+
+import java.util.ArrayList;
 
 /**
  * Application for the first exercise.
@@ -37,7 +40,7 @@ public class CGFrame extends AbstractCGFrame {
      */
     public CGFrame(int timerInverval) {
         super(timerInverval);
-        excercise4();
+        exercise5();
     }
 
     /**
@@ -67,17 +70,33 @@ public class CGFrame extends AbstractCGFrame {
         }
     }
 
-    private void excercise4() {
+    private void exercise5() {
+        ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
+        this.getRoot().addChild(shaderNode);
+        ArrayList<Vector3> v = new ArrayList<>();
+
+        v.add(new Vector3(0, 0, 0));
+        v.add(new Vector3(0, 0, 3));
+        v.add(new Vector3(0, 3, 3));
+
+        MonomialCurve curve = new MonomialCurve(v);
+        CurveNode curveNode = new CurveNode(curve, 5);
+        shaderNode.addChild(curveNode);
+
+    }
+
+    private void exercise4() {
         ImplicitFunction function = new ImplicitFunction();
         //function.torus(0.5, 1);
         //function.sphere(1);
-        function.superQuadratic(0.1, 0.4, 0.3, 0.5, 0.5);
+        function.superQuadratic(1, 0.4, 0.3, 0.2, 0.5);
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
+        triangleMesh = new HalfEdgeTriangleMeshNode(function);
         this.getRoot().addChild(shaderNode);
-        shaderNode.addChild(new HalfEdgeTriangleMeshNode(function));
+        shaderNode.addChild(triangleMesh);
     }
 
-    private void excercise3() {
+    private void exercise3() {
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
         triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
@@ -97,7 +116,7 @@ public class CGFrame extends AbstractCGFrame {
         }
     }
 
-    private void excercise2() {
+    private void exercise2() {
         // Shader node does the lighting computation
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         getRoot().addChild(shaderNode);
@@ -121,7 +140,7 @@ public class CGFrame extends AbstractCGFrame {
         generateTrees(25);
     }
 
-    private void excercise1() {
+    private void exercise1() {
         // Shader node does the lighting computation
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         getRoot().addChild(shaderNode);
