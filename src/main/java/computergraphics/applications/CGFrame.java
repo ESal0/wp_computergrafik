@@ -9,6 +9,7 @@ package computergraphics.applications;
 
 import com.jogamp.newt.event.KeyEvent;
 import computergraphics.framework.AbstractCGFrame;
+import computergraphics.math.AbstractCurve;
 import computergraphics.math.ImplicitFunction;
 import computergraphics.math.MonomialCurve;
 import computergraphics.math.Vector3;
@@ -30,10 +31,13 @@ public class CGFrame extends AbstractCGFrame {
     private static final long serialVersionUID = 4257130065274995543L;
     private static final double FLOORWIDTH = 5;
     private static final double FLOORBREADTH = 5;
+    private static double derivativeInterval = 0.0;
+    private static boolean showDerivative = false;
     private FloorNode floorNode;
     private TranslationNode helicopterTranslation;
     private HelicopterNode helicopter;
     private HalfEdgeTriangleMeshNode triangleMesh;
+    private CurveNode curveNode;
 
     /**
      * Constructor.
@@ -58,7 +62,8 @@ public class CGFrame extends AbstractCGFrame {
      */
     @Override
     protected void timerTick() {
-        System.out.println("Tick");
+
+        //System.out.println("Tick");
     }
 
     public void keyPressed(int keyCode) {
@@ -68,6 +73,14 @@ public class CGFrame extends AbstractCGFrame {
             triangleMesh.applyFilter();
             triangleMesh.calculateCurvature();
         }
+        if (keyCode == KeyEvent.VK_J && derivativeInterval >= 0.01) {
+            derivativeInterval -= 0.01;
+            curveNode.setDerivativePoint(derivativeInterval);
+        }
+        if (keyCode == KeyEvent.VK_K && derivativeInterval < 1.0) {
+            derivativeInterval += 0.01;
+            curveNode.setDerivativePoint(derivativeInterval);
+        }
     }
 
     private void exercise5() {
@@ -76,13 +89,37 @@ public class CGFrame extends AbstractCGFrame {
         ArrayList<Vector3> v = new ArrayList<>();
 
         v.add(new Vector3(0, 0, 0));
-        v.add(new Vector3(0, 0, 3));
-        v.add(new Vector3(0, 3, 3));
+       /* v.add(new Vector3(0.2, 4, 0));
+        v.add(new Vector3(0.4, 0, 0));
+        v.add(new Vector3(0.4, 0, 2));*/
+        v.add(new Vector3(0, 1, 0));
+        //v.add(new Vector3(1, 0, 0));
+        v.add(new Vector3(1, 1, 0));
 
-        MonomialCurve curve = new MonomialCurve(v);
-        CurveNode curveNode = new CurveNode(curve, 5);
-        shaderNode.addChild(curveNode);
+        shaderNode.addChild(drawControlPoints(v));
 
+        AbstractCurve curve = new MonomialCurve(v);
+        curveNode = new CurveNode(curve, 1000);
+        this.getRoot().addChild(curveNode);
+
+    }
+
+    private GroupNode drawControlPoints(ArrayList<Vector3> points) {
+        GroupNode controlPoints = new GroupNode();
+        for (Vector3 v : points) {
+            TranslationNode t = new TranslationNode(v);
+            controlPoints.addChild(t);
+            t.addChild(new SphereNode(0.05, 10));
+        }
+        return controlPoints;
+    }
+
+    private GroupNode drawControlPolygon(ArrayList<Vector3> points) {
+        GroupNode controlPolygon = new GroupNode();
+        for (Vector3 v : points) {
+
+        }
+        return controlPolygon;
     }
 
     private void exercise4() {
@@ -102,10 +139,6 @@ public class CGFrame extends AbstractCGFrame {
         triangleMesh = new HalfEdgeTriangleMeshNode("meshes\\cow.obj");
         shaderNode.addChild(triangleMesh);
     }
-
-	/* generates amount of trees and randomly places on Floorwidth*Floorbreadth
-     area
-	 */
 
     private void generateTrees(int amount) {
         for (int i = 0; i < amount; i++) {
