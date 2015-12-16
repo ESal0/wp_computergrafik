@@ -68,7 +68,7 @@ public class MonomialCurve extends AbstractCurve {
 
         for (int i = 0; i < controlPoints.size(); i++) {
             double base = Math.pow(val, i);
-            System.out.println("base: " + base + "  buffer: " + controlPoints.get(i).multiply(base) + " i: " + i);
+            //System.out.println("base: " + base + "  buffer: " + controlPoints.get(i).multiply(base) + " i: " + i);
             Vector3 ci = controlPoints.get(i);
             res = res.add(ci.multiply(base));
         }
