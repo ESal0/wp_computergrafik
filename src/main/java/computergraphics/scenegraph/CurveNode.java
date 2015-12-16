@@ -27,17 +27,19 @@ public class CurveNode extends Node {
         gl.glNewList(meshID, GL2.GL_COMPILE);
 
         drawCurve(gl);
-        drawDerivative(gl);
+        drawTangential(gl);
         gl.glEndList();
     }
 
-    private void drawDerivative(GL2 gl) {
+    private void drawTangential(GL2 gl) {
         gl.glColor3d(0.0, 0.0, 1.0);
         Vector3 derivative = curve.derivative(derivativePoint);
         Vector3 point = curve.evaluate(derivativePoint);
+
         gl.glBegin(GL.GL_LINES);
         gl.glVertex3d(point.get(0), point.get(1), point.get(2));
-        gl.glVertex3d(derivative.get(0), derivative.get(1), derivative.get(2));
+        gl.glVertex3d(derivative.get(0) * 1.1, derivative.get(1) * 1.1, derivative.get(2) * 1.1);
+        //gl.glVertex3d(derivative.get(0), derivative.get(1), derivative.get(2));
         gl.glEnd();
     }
 

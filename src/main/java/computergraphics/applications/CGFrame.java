@@ -93,13 +93,13 @@ public class CGFrame extends AbstractCGFrame {
         v.add(new Vector3(0.4, 0, 0));
         v.add(new Vector3(0.4, 0, 2));*/
         v.add(new Vector3(0, 1, 0));
-        //v.add(new Vector3(1, 0, 0));
+        v.add(new Vector3(1, 0, 0));
         v.add(new Vector3(1, 1, 0));
 
         shaderNode.addChild(drawControlPoints(v));
 
         AbstractCurve curve = new MonomialCurve(v);
-        curveNode = new CurveNode(curve, 1000);
+        curveNode = new CurveNode(curve, 15);
         this.getRoot().addChild(curveNode);
 
     }
