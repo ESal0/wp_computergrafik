@@ -9,10 +9,7 @@ package computergraphics.applications;
 
 import com.jogamp.newt.event.KeyEvent;
 import computergraphics.framework.AbstractCGFrame;
-import computergraphics.math.AbstractCurve;
-import computergraphics.math.ImplicitFunction;
-import computergraphics.math.MonomialCurve;
-import computergraphics.math.Vector3;
+import computergraphics.math.*;
 import computergraphics.scenegraph.*;
 import computergraphics.scenegraph.ShaderNode.ShaderType;
 
@@ -87,6 +84,7 @@ public class CGFrame extends AbstractCGFrame {
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
         ArrayList<Vector3> v = new ArrayList<>();
+        ArrayList<Vector3> b = new ArrayList<>();
 
         v.add(new Vector3(0, 0, 0));
        /* v.add(new Vector3(0.2, 4, 0));
@@ -94,11 +92,17 @@ public class CGFrame extends AbstractCGFrame {
         v.add(new Vector3(0.4, 0, 2));*/
         v.add(new Vector3(0, 1, 0));
         v.add(new Vector3(1, 0, 0));
-        v.add(new Vector3(1, 1, 0));
+        //v.add(new Vector3(1, 1, 0));
 
-        shaderNode.addChild(drawControlPoints(v));
+        b.add(new Vector3(0,0,0));
+        b.add(new Vector3(-0.2,-0.5,0));
+        b.add(new Vector3(0.2,-1,0));
+        b.add(new Vector3(1,0.2,0));
+        b.add(new Vector3(1.2,-0.21,0));
 
-        AbstractCurve curve = new MonomialCurve(v);
+        shaderNode.addChild(drawControlPoints(b));
+
+        AbstractCurve curve = new BezierCurve(b);
         curveNode = new CurveNode(curve, 15);
         this.getRoot().addChild(curveNode);
 
@@ -112,14 +116,6 @@ public class CGFrame extends AbstractCGFrame {
             t.addChild(new SphereNode(0.05, 10));
         }
         return controlPoints;
-    }
-
-    private GroupNode drawControlPolygon(ArrayList<Vector3> points) {
-        GroupNode controlPolygon = new GroupNode();
-        for (Vector3 v : points) {
-
-        }
-        return controlPolygon;
     }
 
     private void exercise4() {

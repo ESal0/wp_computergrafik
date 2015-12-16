@@ -28,7 +28,7 @@ public class MonomialCurve extends AbstractCurve {
             c1 = c1.subtract(points.get(0).multiply(3));
             c1 = c1.subtract(points.get(2));
             Vector3 c2 = points.get(2).subtract(points.get(0));
-            c2 = c2.subtract(c0);
+            c2 = c2.subtract(c1);
 
             ArrayList<Vector3> controlPoints = new ArrayList<>();
             controlPoints.add(c0);

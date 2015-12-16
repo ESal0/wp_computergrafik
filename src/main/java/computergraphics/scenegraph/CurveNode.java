@@ -13,7 +13,7 @@ public class CurveNode extends Node {
     private AbstractCurve curve;
     private double resolution;
     private int meshID = 0;
-    private double derivativePoint = 0.5;
+    private double derivativePoint = 0.0;
     private boolean toggleUpdate = false;
 
     public CurveNode(AbstractCurve curve, int resolution) {
@@ -27,7 +27,7 @@ public class CurveNode extends Node {
         gl.glNewList(meshID, GL2.GL_COMPILE);
 
         drawCurve(gl);
-        drawTangential(gl);
+        //drawTangential(gl);
         gl.glEndList();
     }
 
