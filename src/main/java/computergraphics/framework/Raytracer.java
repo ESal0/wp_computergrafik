@@ -118,19 +118,26 @@ public class Raytracer {
 
                 //diffuse
                 double buffer = lightVector.multiply(closestIntersection.normal);
-                //i dont know why buffer <= 0.0, but its in "03_lokale_beleuchtungsrechnung". probably the "light-ray" doesn't hit the intersection (implemented the other way around)
                 if (buffer > 0.0) {
-                    result = result.add(objectColour.multiply(buffer));
+                    Vector3 diffuseColor = objectColour.multiply(buffer);
+                    diffuseColor.set(0, diffuseColor.get(0) * lightColour.get(0));
+                    diffuseColor.set(1, diffuseColor.get(1) * lightColour.get(1));
+                    diffuseColor.set(2, diffuseColor.get(2) * lightColour.get(2));
+                    result = result.add(diffuseColor);
                 }
 
                 //specular
                 double r1 = lightVector.multiply(closestIntersection.normal) * 2;
                 Vector3 r2 = closestIntersection.normal.multiply(r1);
                 Vector3 r = lightVector.subtract(r2);
-                //buffer = r.multiply(ray.getDirection().multiply(-1)); this should be it, but then the "highlighs" appear in the shadows
+                //buffer = r.multiply(ray.getDirection().multiply(-1)); //this should be the formula, but then the "highlighs" appear in the shadows
                 buffer = r.multiply(ray.getDirection());
                 if (buffer > 0.0) {
-                    result = result.add(lightColour.multiply(Math.pow(buffer, 20.0)));
+                    Vector3 specularColor = new Vector3(1, 1, 1).multiply(Math.pow(buffer, 20.0));
+                    specularColor.set(0, specularColor.get(0) * lightColour.get(0));
+                    specularColor.set(1, specularColor.get(1) * lightColour.get(1));
+                    specularColor.set(2, specularColor.get(2) * lightColour.get(2));
+                    result = result.add(specularColor);
                 }
             }
         }

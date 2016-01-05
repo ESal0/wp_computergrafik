@@ -113,4 +113,12 @@ public class SphereNode extends Node implements IRaytraceable {
         result.normal = new Vector3((result.point.get(0) - center.get(0)) / radius, (result.point.get(1) - center.get(1)) / radius, (result.point.get(2) - center.get(2)) / radius).getNormalized();
         return result;
     }
+
+    public Vector3 getCenter() {
+        return center;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
 }

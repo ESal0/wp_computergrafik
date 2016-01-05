@@ -13,7 +13,6 @@ public class FloorNode extends Node implements IRaytraceable {
     //we need the center, as a point, where we know, its in the floor
     private Vector3 center;
 
-
     public FloorNode(double width, double height, double depth, Vector3 colour) {
         //super(width, height, depth);
         this.width = width;
@@ -23,6 +22,10 @@ public class FloorNode extends Node implements IRaytraceable {
         this.center = new Vector3((-width / 2 + width / 2) / 2, (height / 2 + height / 2) / 2, (-depth / 2 + depth / 2) / 2);
         this.type = "floor";
         this.colour = colour;
+    }
+
+    public Vector3 getCenter() {
+        return center;
     }
 
     public void drawGl(GL2 gl) {
