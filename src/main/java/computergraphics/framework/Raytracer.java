@@ -96,23 +96,31 @@ public class Raytracer {
         for (Node n : nodes) {
             if (n instanceof IRaytraceable) {
                 IntersectionResult intersection = ((IRaytraceable) n).findIntersection(ray);
-                if (intersection != null && intersection.point.getSqrNorm() < closestIntersection.point.getSqrNorm()) {
+                if (intersection != null && intersection.point.getNorm() < closestIntersection.point.getNorm()) {
                     closestIntersection = intersection;
                 }
             }
         }
 
-        //does the lightig
+        //does the lighting
         if (closestIntersection.object != null) {
             for (int i = 0; i < rootNode.getNumberOfLightSources(); i++) {
                 Vector3 lightVector = (rootNode.getLightSource(i).getPosition().subtract(closestIntersection.point.getNormalized())).getNormalized();
-                Vector3 colour = closestIntersection.object.getColour();
+                Vector3 objectColour = closestIntersection.object.getColour();
+                Vector3 lightColour = rootNode.getLightSource(i).getColor();
+
+                //shadows
+                Ray3D shadowRay = new Ray3D(closestIntersection.point, lightVector.getNormalized());
+                if (traceShadows(shadowRay, 0)) {
+                    result.add(new Vector3());
+                    break;
+                }
 
                 //diffuse
                 double buffer = lightVector.multiply(closestIntersection.normal);
                 //i dont know why buffer <= 0.0, but its in "03_lokale_beleuchtungsrechnung". probably the "light-ray" doesn't hit the intersection (implemented the other way around)
                 if (buffer > 0.0) {
-                    result = result.add(colour.multiply(buffer));
+                    result = result.add(objectColour.multiply(buffer));
                 }
 
                 //specular
@@ -122,7 +130,7 @@ public class Raytracer {
                 //buffer = r.multiply(ray.getDirection().multiply(-1)); this should be it, but then the "highlighs" appear in the shadows
                 buffer = r.multiply(ray.getDirection());
                 if (buffer > 0.0) {
-                    result = result.add((new Vector3(1, 1, 1).multiply(Math.pow(buffer, 20.0))));
+                    result = result.add(lightColour.multiply(Math.pow(buffer, 20.0)));
                 }
             }
         }
@@ -163,5 +171,18 @@ public class Raytracer {
         }
 
         return null;
+    }
+
+    private boolean traceShadows(Ray3D ray, int recursion) {
+        //get the "closest" intersection on a ray
+        for (Node n : nodes) {
+            if (n instanceof IRaytraceable) {
+                IntersectionResult intersection = ((IRaytraceable) n).findIntersection(ray);
+                if (intersection != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
