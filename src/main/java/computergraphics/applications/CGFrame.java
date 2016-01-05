@@ -9,7 +9,12 @@ package computergraphics.applications;
 
 import com.jogamp.newt.event.KeyEvent;
 import computergraphics.framework.AbstractCGFrame;
-import computergraphics.math.*;
+import computergraphics.framework.ImageViewer;
+import computergraphics.framework.Raytracer;
+import computergraphics.math.AbstractCurve;
+import computergraphics.math.BezierCurve;
+import computergraphics.math.ImplicitFunction;
+import computergraphics.math.Vector3;
 import computergraphics.scenegraph.*;
 import computergraphics.scenegraph.ShaderNode.ShaderType;
 
@@ -41,7 +46,7 @@ public class CGFrame extends AbstractCGFrame {
      */
     public CGFrame(int timerInverval) {
         super(timerInverval);
-        exercise5();
+        exercise6();
     }
 
     /**
@@ -80,6 +85,20 @@ public class CGFrame extends AbstractCGFrame {
         }
     }
 
+    private void exercise6() {
+        Raytracer raytracer = new Raytracer(this.getCamera(), this.getRoot());
+        ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
+        this.getRoot().addChild(shaderNode);
+
+        shaderNode.addChild(new FloorNode(-15.0, -1.0, 15.0, new Vector3(0.25, 0.25, 0.25)));
+        shaderNode.addChild(new SphereNode(0.1, 20, new Vector3(0, 0.3, 0), new Vector3(0.5, 0, 0.5)));
+        shaderNode.addChild(new SphereNode(0.2, 20, new Vector3(0.2, 0.2, -0.1), new Vector3(0.5, 0, 0.5)));
+        this.getRoot().addLightSource(new LightSource(new Vector3(5, 5, 5), new Vector3(1, 1, 1)));
+        this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, -5), new Vector3(1, 1, 1)));
+        new ImageViewer(raytracer.render(1024, 860));
+
+    }
+
     private void exercise5() {
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
@@ -94,11 +113,11 @@ public class CGFrame extends AbstractCGFrame {
         v.add(new Vector3(1, 0, 0));
         //v.add(new Vector3(1, 1, 0));
 
-        b.add(new Vector3(0,0,0));
-        b.add(new Vector3(-0.2,-0.5,0));
-        b.add(new Vector3(0.2,-1,0));
-        b.add(new Vector3(1,0.2,0));
-        b.add(new Vector3(1.2,-0.21,0));
+        b.add(new Vector3(0, 0, 0));
+        b.add(new Vector3(-0.2, -0.5, 0));
+        b.add(new Vector3(0.2, -1, 0));
+        b.add(new Vector3(1, 0.2, 0));
+        b.add(new Vector3(1.2, -0.21, 0));
 
         shaderNode.addChild(drawControlPoints(b));
 
@@ -113,7 +132,7 @@ public class CGFrame extends AbstractCGFrame {
         for (Vector3 v : points) {
             TranslationNode t = new TranslationNode(v);
             controlPoints.addChild(t);
-            t.addChild(new SphereNode(0.05, 10));
+            t.addChild(new SphereNode(0.05, 10, new Vector3()));
         }
         return controlPoints;
     }
@@ -151,7 +170,7 @@ public class CGFrame extends AbstractCGFrame {
         getRoot().addChild(shaderNode);
 
         // Adding the floor
-        floorNode = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH);
+        floorNode = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH, new Vector3());
         shaderNode.addChild(floorNode);
 
         // adding the helicopter
@@ -189,7 +208,7 @@ public class CGFrame extends AbstractCGFrame {
         scaleNode.addChild(triangleNode);
 
         // Sphere
-        SphereNode sphereNode = new SphereNode(0.25, 20);
+        SphereNode sphereNode = new SphereNode(0.25, 20, new Vector3());
         shaderNode.addChild(sphereNode);
     }
 }

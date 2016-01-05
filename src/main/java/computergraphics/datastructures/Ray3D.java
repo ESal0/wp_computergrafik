@@ -4,7 +4,7 @@ import computergraphics.math.Vector3;
 
 /**
  * Representation of a ray in 3-space.
- * 
+ *
  * @author Philipp Jenke
  *
  */

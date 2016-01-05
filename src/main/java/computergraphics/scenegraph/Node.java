@@ -6,14 +6,13 @@
  */
 package computergraphics.scenegraph;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jogamp.opengl.GL2;
-
 import computergraphics.datastructures.IntersectionResult;
 import computergraphics.datastructures.Ray3D;
 import computergraphics.math.Vector3;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parent class for all scene graph nodes.
@@ -23,10 +22,12 @@ import computergraphics.math.Vector3;
  */
 public abstract class Node {
 
+  protected String type = "node";
+  protected Vector3 colour = null;
   /**
    * List of child nodes
    */
-  private List<Node> children = new ArrayList<Node>();
+  private List<Node> children = new ArrayList<>();
 
   /**
    * Add a child node.
@@ -64,12 +65,19 @@ public abstract class Node {
     return null;
   }
 
-  public Vector3 getColor() {
-    return new Vector3(0, 1, 0);
-  }
-  
   public IntersectionResult findIntersection(Node object, Ray3D ray) {
     return null;
   }
 
+  public List<Node> getAllChildren() {
+    return children;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public Vector3 getColour() {
+    return colour;
+  }
 }

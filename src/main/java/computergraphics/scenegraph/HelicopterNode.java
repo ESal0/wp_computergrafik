@@ -1,7 +1,6 @@
 package computergraphics.scenegraph;
 
 import com.jogamp.opengl.GL2;
-
 import computergraphics.math.Vector3;
 
 public class HelicopterNode extends Node {
@@ -13,7 +12,7 @@ public class HelicopterNode extends Node {
 		// Creating the nodes
 
 		// Sphere for the Cockpit
-		SphereNode cockpit = new SphereNode(0.15, 20);
+		SphereNode cockpit = new SphereNode(0.15, 20, new Vector3());
 
 		// Cylinder for the body of the copter
 		CylinderNode copterMiddle = new CylinderNode(0.15, 0.13, 0.3, 20);
@@ -37,7 +36,7 @@ public class HelicopterNode extends Node {
 
 		// The back/closing of the copter
 		TranslationNode copterBackClosingTranslation = new TranslationNode(new Vector3(0, 0, 0.3));
-		SphereNode copterBackClosing = new SphereNode(0.13, 20);
+		SphereNode copterBackClosing = new SphereNode(0.13, 20, new Vector3());
 
 		// the mast on top of the copter, axis for the rotor
 		TranslationNode rotorMastTranslation = new TranslationNode(new Vector3(0, 0.16, 0.15));
@@ -54,7 +53,7 @@ public class HelicopterNode extends Node {
 		TranslationNode tailBoomEndTranslation = new TranslationNode(new Vector3(0, 0, 0.9));
 
 		// the end of the tailboom
-		SphereNode tailBoomEnd = new SphereNode(0.03, 10);
+		SphereNode tailBoomEnd = new SphereNode(0.03, 10, new Vector3());
 
 		// The mast of the tail-rotor
 		TranslationNode tailRotorMastTranslation = new TranslationNode(new Vector3(0, 0, 0.9));

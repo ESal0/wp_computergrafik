@@ -1,7 +1,6 @@
 package computergraphics.scenegraph;
 
 import com.jogamp.opengl.GL2;
-
 import computergraphics.math.Vector3;
 
 public class TreeNode extends Node{
@@ -21,7 +20,7 @@ public class TreeNode extends Node{
 		stem = new CylinderNode(0.06, 0.04, 0.5, 20);
 		
 		//crown of the tree
-		crown = new SphereNode(0.25, 20);
+		crown = new SphereNode(0.25, 20, new Vector3());
 		
 		//moving the crown on ontop the stem
 		translation = new TranslationNode(new Vector3(0,0.5,0));
