@@ -98,9 +98,9 @@ public class SphereNode extends Node implements IRaytraceable {
         double lambda;
 
         //One, two or no intersection - take the closest
-        if (l1 > 0 && l1 < l2) {
+        if (l1 > 0.00001 && l1 < l2) {
             lambda = l1;
-        } else if (l2 > 0) {
+        } else if (l2 > 0.00001) {
             lambda = l2;
         } else {
             return null;
