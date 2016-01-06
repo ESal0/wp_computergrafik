@@ -91,14 +91,16 @@ public class Raytracer {
         // Your task
         Vector3 result = new Vector3(0, 0, 0);
         IntersectionResult closestIntersection = new IntersectionResult();
-        closestIntersection.point = new Vector3(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
-
+        Vector3 closestDistance = new Vector3(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
         //get the "closest" intersection of the camera
         for (Node n : nodes) {
             if (n instanceof IRaytraceable) {
                 IntersectionResult intersection = ((IRaytraceable) n).findIntersection(ray);
-                if (intersection != null && intersection.point.getNorm() < closestIntersection.point.getNorm()) {
-                    closestIntersection = intersection;
+                if (intersection != null) {
+                    Vector3 distance = intersection.point.subtract(camera.getEye());
+                    if (distance.getNorm() < closestDistance.getNorm()) {
+                        closestIntersection = intersection;
+                    }
                 }
             }
         }

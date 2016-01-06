@@ -94,8 +94,8 @@ public class CGFrame extends AbstractCGFrame {
         shaderNode.addChild(new SphereNode(0.4, 25, new Vector3(0.5, 1, -1), new Vector3(0.5, 0, 0.5)));
         shaderNode.addChild(new SphereNode(0.6, 20, new Vector3(-0.2, 0.7, -1.3), new Vector3(0.9, 0.2, 0.1)));
         shaderNode.addChild(new SphereNode(0.3, 20, new Vector3(2, 0.7, -1.6), new Vector3(0.8, 0.8, 0.8)));
-        this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, 5), new Vector3(0, 0, 1)));
-        this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, 0), new Vector3(1, 1, 1)));
+        // this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, 5), new Vector3(0, 0, 1)));
+        this.getRoot().addLightSource(new LightSource(new Vector3(5, 8, 0), new Vector3(1, 1, 1)));
         new ImageViewer(raytracer.render(1920, 1080));
 
     }
