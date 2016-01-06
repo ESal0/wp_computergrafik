@@ -1,9 +1,7 @@
 import computergraphics.datastructures.IntersectionResult;
 import computergraphics.datastructures.Ray3D;
-import computergraphics.framework.Raytracer;
 import computergraphics.math.Vector3;
 import computergraphics.scenegraph.FloorNode;
-import computergraphics.scenegraph.RootNode;
 import computergraphics.scenegraph.SphereNode;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +15,8 @@ import static junit.framework.Assert.assertNull;
  */
 public class RaytracingTests {
 
-    RootNode rootNode;
     SphereNode sphereNode;
     FloorNode floorNode;
-    Raytracer raytracer;
     Ray3D ray1;
     Ray3D ray2;
 

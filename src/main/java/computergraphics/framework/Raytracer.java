@@ -52,6 +52,7 @@ public class Raytracer {
         double openingAngleYScale = Math.sin(camera.getOpeningAngle() * Math.PI / 180.0);
         double openingAngleXScale = openingAngleYScale * (double) resolutionX / (double) resolutionY;
 
+        //collect all nodes of the scenegraph
         nodes = collectNodes();
 
         for (int i = 0; i < resolutionX; i++) {
@@ -105,6 +106,7 @@ public class Raytracer {
         //does the lighting
         if (closestIntersection.object != null) {
             for (int i = 0; i < rootNode.getNumberOfLightSources(); i++) {
+                //Vector from the intersection to the light
                 Vector3 lightVector = (rootNode.getLightSource(i).getPosition().subtract(closestIntersection.point.getNormalized())).getNormalized();
                 Vector3 objectColour = closestIntersection.object.getColour();
                 Vector3 lightColour = rootNode.getLightSource(i).getColor();
@@ -112,6 +114,7 @@ public class Raytracer {
                 //shadows
                 Ray3D shadowRay = new Ray3D(closestIntersection.point, lightVector.getNormalized());
                 if (traceShadows(shadowRay, 0)) {
+                    //if theres a intersection between the light and the point, add black(shadow)
                     result.add(new Vector3());
                     break;
                 }
@@ -120,6 +123,7 @@ public class Raytracer {
                 double buffer = lightVector.multiply(closestIntersection.normal);
                 if (buffer > 0.0) {
                     Vector3 diffuseColor = objectColour.multiply(buffer);
+                    //Multiplying the light-colour on the object color, e.g. white objects appear blue under blue light
                     diffuseColor.set(0, diffuseColor.get(0) * lightColour.get(0));
                     diffuseColor.set(1, diffuseColor.get(1) * lightColour.get(1));
                     diffuseColor.set(2, diffuseColor.get(2) * lightColour.get(2));
@@ -134,6 +138,7 @@ public class Raytracer {
                 buffer = r.multiply(ray.getDirection());
                 if (buffer > 0.0) {
                     Vector3 specularColor = new Vector3(1, 1, 1).multiply(Math.pow(buffer, 20.0));
+                    //Multiplying the light-colour on the object color, e.g. white objects appear blue under blue light
                     specularColor.set(0, specularColor.get(0) * lightColour.get(0));
                     specularColor.set(1, specularColor.get(1) * lightColour.get(1));
                     specularColor.set(2, specularColor.get(2) * lightColour.get(2));
@@ -167,17 +172,6 @@ public class Raytracer {
         }
         System.out.println("# of nodes: " + done.size());
         return new ArrayList<>(done);
-    }
-
-    //TODO: delete or do this before wednesday
-    //ignore this, unless good end-recursion is found for collecting traceable nodes
-    private Vector3 _trace(Ray3D ray, int recursion, ArrayList<Node> nodes, Node lastNode) {
-        if (lastNode.getNumberOfChildren() > 0) {
-            //ignore this
-            boolean placeholder = true;
-        }
-
-        return null;
     }
 
     private boolean traceShadows(Ray3D ray, int recursion) {
