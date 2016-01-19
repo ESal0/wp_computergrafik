@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java" line="112" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java" line="91" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java" line="114" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java" line="102" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java" line="112" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java" line="65" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b297f47f-6a72-4850-9381-5f6ef132179e" name="Default" comment="- bugfix: spheres no longer clip" />
+    <list default="true" id="b297f47f-6a72-4850-9381-5f6ef132179e" name="Default" comment="- bugfix: spheres no longer clip">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/applications/CGFrame.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/applications/CGFrame.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/scenegraph/FloorNode.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/scenegraph/FloorNode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/datastructures/IRaytraceable.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/datastructures/IRaytraceable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/framework/ImageViewer.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/framework/ImageViewer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/framework/Raytracer.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/framework/Raytracer.class" />
+      <change type="MODIFICATION" beforePath="C:\1 - Studium\cg_exercises\build\classes\test\RaytracingTests.class" afterPath="C:\1 - Studium\cg_exercises\build\classes\test\RaytracingTests.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/main/computergraphics/scenegraph/SphereNode.class" afterPath="$PROJECT_DIR$/build/classes/main/computergraphics/scenegraph/SphereNode.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/RaytracingTests.java" afterPath="$PROJECT_DIR$/src/test/java/RaytracingTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java" afterPath="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="cg_exercises.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -32,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+              <caret line="115" column="102" selection-start-line="115" selection-start-column="102" selection-end-line="115" selection-end-column="102" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,40 +59,78 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Vector3.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/math/Vector3.java">
+      <file leaf-file-name="IRaytraceable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Camera.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Camera.java">
+      <file leaf-file-name="FloorNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36313868">
-              <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#395#396#0" expanded="true" />
+                <element signature="e#424#425#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="5" />
+              <folding>
+                <element signature="e#1837#1838#0" expanded="true" />
+                <element signature="e#1866#1867#0" expanded="true" />
+                <element signature="e#1913#1914#0" expanded="true" />
+                <element signature="e#1942#1943#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SphereNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CGFrame.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CGFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="97" column="66" selection-start-line="97" selection-start-column="66" selection-end-line="97" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.270073">
+              <caret line="100" column="48" selection-start-line="100" selection-start-column="48" selection-end-line="100" selection-end-column="48" />
               <folding>
-                <element signature="method#keyPressed#0;class#CGFrame#0" expanded="false" />
                 <element signature="method#exercise5#0;class#CGFrame#0" expanded="false" />
                 <element signature="method#drawControlPoints#0;class#CGFrame#0" expanded="false" />
                 <element signature="method#exercise4#0;class#CGFrame#0" expanded="false" />
                 <element signature="method#exercise3#0;class#CGFrame#0" expanded="false" />
                 <element signature="method#generateTrees#0;class#CGFrame#0" expanded="false" />
-                <element signature="method#exercise2#0;class#CGFrame#0" expanded="false" />
+                <element signature="method#exercise1#0;class#CGFrame#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageViewer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -498,19 +555,20 @@
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/math/MonomialCurve.java" />
         <option value="$PROJECT_DIR$/src/test/java/CurveTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/Ray3D.java" />
-        <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/TreeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/HelicopterNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/Ray3D.java" />
-        <option value="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/RootNode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/Camera.java" />
+        <option value="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IntersectionResult.java" />
+        <option value="$PROJECT_DIR$/src/test/java/RaytracingTests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java" />
-        <option value="$PROJECT_DIR$/src/test/java/RaytracingTests.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/computergraphics/framework/Camera.java" />
       </list>
     </option>
   </component>
@@ -557,8 +615,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -588,14 +644,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -681,36 +729,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cg_exercises" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cg_exercises" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="computergraphics" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="datastructures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -745,22 +763,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cg_exercises" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cg_exercises" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -1152,6 +1158,8 @@
       <workItem from="1450038265646" duration="42017000" />
       <workItem from="1451824779483" duration="48420000" />
       <workItem from="1452083709598" duration="3842000" />
+      <workItem from="1452951748967" duration="28552000" />
+      <workItem from="1453130289075" duration="11882000" />
     </task>
     <task id="LOCAL-00001" summary="imported into IntelliJ. libaries should be added now">
       <created>1447958161935</created>
@@ -1265,11 +1273,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189524000" />
+    <option name="totallyTimeSpent" value="229958000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1064" extended-state="7" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1064" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1279,10 +1287,10 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3464567" sideWeight="0.49572194" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3464567" sideWeight="0.49572194" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32932165" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20160428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20695187" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1372,7 +1380,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java</url>
-          <line>71</line>
+          <line>74</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
@@ -1380,7 +1388,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="26" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1389,24 +1397,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5086207">
-          <caret line="203" column="25" selection-start-line="203" selection-start-column="25" selection-end-line="203" selection-end-column="25" />
-          <folding>
-            <element signature="e#7835#7836#0" expanded="false" />
-            <element signature="e#7917#7918#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/TriangleFacet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.1362069">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meshes/cube.mtl">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1415,26 +1405,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/meshes/cow.obj">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.031021899">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/math/MathHelpers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1548,18 +1531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/CurveNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1902#1903#0" expanded="false" />
-            <element signature="e#1940#1941#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/math/HermiteCurve.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1605,26 +1576,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/CuboidNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Renderer3D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0680628">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IntersectionResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1632,14 +1587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1688,68 +1635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="46" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#742#743#0" expanded="false" />
-            <element signature="e#771#772#0" expanded="false" />
-            <element signature="e#1125#1126#0" expanded="false" />
-            <element signature="e#1157#1158#0" expanded="false" />
-            <element signature="e#1454#1455#0" expanded="false" />
-            <element signature="e#1475#1476#0" expanded="false" />
-            <element signature="e#1547#1548#0" expanded="false" />
-            <element signature="e#1568#1569#0" expanded="false" />
-            <element signature="e#1608#1609#0" expanded="false" />
-            <element signature="e#1633#1634#0" expanded="false" />
-            <element signature="e#1662#1663#0" expanded="false" />
-            <element signature="e#1683#1684#0" expanded="false" />
-            <element signature="e#1715#1716#0" expanded="false" />
-            <element signature="e#1738#1739#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/RaytracingTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="83" selection-start-line="85" selection-start-column="83" selection-end-line="85" selection-end-column="83" />
-          <folding>
-            <element signature="e#3677#3678#0" expanded="true" />
-            <element signature="e#3706#3707#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="24" selection-start-line="66" selection-start-column="24" selection-end-line="66" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/AbstractCGFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1762,7 +1647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1770073">
           <caret line="334" column="9" selection-start-line="334" selection-start-column="9" selection-end-line="334" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1770,7 +1654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1782,18 +1665,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/CuboidNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="66" selection-start-line="97" selection-start-column="66" selection-end-line="97" selection-end-column="66" />
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/CurveNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.031021899">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/GroupNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/math/BigDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2622" column="15" selection-start-line="2622" selection-start-column="15" selection-end-line="2622" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="26" selection-start-line="47" selection-start-column="26" selection-end-line="47" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IntersectionResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68248177">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/RaytracingTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43430656">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/ImageViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/datastructures/IRaytraceable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/math/MathHelpers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.031021899">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="5" />
           <folding>
-            <element signature="method#keyPressed#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#exercise5#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#drawControlPoints#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#exercise4#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#exercise3#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#generateTrees#0;class#CGFrame#0" expanded="false" />
-            <element signature="method#exercise2#0;class#CGFrame#0" expanded="false" />
+            <element signature="e#1837#1838#0" expanded="true" />
+            <element signature="e#1866#1867#0" expanded="true" />
+            <element signature="e#1913#1914#0" expanded="true" />
+            <element signature="e#1942#1943#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/FloorNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="38" selection-start-line="80" selection-start-column="38" selection-end-line="80" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1801,18 +1769,33 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Raytracer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+          <caret line="115" column="102" selection-start-line="115" selection-start-column="102" selection-end-line="115" selection-end-column="102" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/framework/Camera.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/scenegraph/SphereNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36313868">
-          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/computergraphics/applications/CGFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.270073">
+          <caret line="100" column="48" selection-start-line="100" selection-start-column="48" selection-end-line="100" selection-end-column="48" />
+          <folding>
+            <element signature="method#exercise5#0;class#CGFrame#0" expanded="false" />
+            <element signature="method#drawControlPoints#0;class#CGFrame#0" expanded="false" />
+            <element signature="method#exercise4#0;class#CGFrame#0" expanded="false" />
+            <element signature="method#exercise3#0;class#CGFrame#0" expanded="false" />
+            <element signature="method#generateTrees#0;class#CGFrame#0" expanded="false" />
+            <element signature="method#exercise1#0;class#CGFrame#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -35,14 +35,20 @@ public class SphereNode extends Node implements IRaytraceable {
      */
     private int resolution;
 
+    /*
+     * Factor of how much this object reflects light
+     */
+    private double reflectionFactor;
+
     /**
      * Constructors.
      */
 
-    public SphereNode(double radius, int resolution, Vector3 center, Vector3 colour) {
+    public SphereNode(double radius, int resolution, Vector3 center, Vector3 colour, double reflectionFactor) {
         this.center = center;
         this.radius = radius;
         this.resolution = resolution;
+        this.reflectionFactor = reflectionFactor;
         this.colour = colour;
         this.type = "sphere";
     }
@@ -53,6 +59,7 @@ public class SphereNode extends Node implements IRaytraceable {
         this.resolution = resolution;
         this.colour = new Vector3(0.15, 0.50, 0.15);
         this.type = "sphere";
+        this.reflectionFactor = 0.0;
     }
 
     public SphereNode(double radius, int resolution) {
@@ -61,10 +68,7 @@ public class SphereNode extends Node implements IRaytraceable {
         this.resolution = resolution;
         this.colour = new Vector3(0.15, 0.50, 0.15);
         this.type = "sphere";
-    }
-
-    public Vector3 getColour() {
-        return colour;
+        this.reflectionFactor = 0.0;
     }
 
     @Override
@@ -81,6 +85,11 @@ public class SphereNode extends Node implements IRaytraceable {
         final int stacks = resolution;
         glu.gluSphere(earth, radius, slices, stacks);
         gl.glPopMatrix();
+    }
+
+    @Override
+    public double getReflectionFactor() {
+        return this.reflectionFactor;
     }
 
     //Finds the intersection. formula is taken from 06_globale_beleuchtungsrechnung

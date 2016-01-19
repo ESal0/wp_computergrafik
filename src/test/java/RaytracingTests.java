@@ -22,8 +22,8 @@ public class RaytracingTests {
 
     @Before
     public void init() {
-        sphereNode = new SphereNode(1, 1, new Vector3(0, 0, 0), new Vector3(1, 1, 1));
-        floorNode = new FloorNode(1, 1, 1, new Vector3(0, 0, 0));
+        sphereNode = new SphereNode(1, 1, new Vector3(0, 0, 0), new Vector3(1, 1, 1), 0.0);
+        floorNode = new FloorNode(1, 1, 1, 0.0, new Vector3(0, 0, 0));
         ray1 = new Ray3D(new Vector3(5, 5, 5), new Vector3(-1, -1, -1).getNormalized());
         ray2 = new Ray3D(new Vector3(5, 5, 5), new Vector3(99, 99, 99).getNormalized());
     }

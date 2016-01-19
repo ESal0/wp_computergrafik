@@ -35,11 +35,14 @@ public class CGFrame extends AbstractCGFrame {
     private static final double FLOORBREADTH = 5;
     private static double derivativeInterval = 0.0;
     private static boolean showDerivative = false;
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_BREADTH = 600;
     private FloorNode floorNode;
     private TranslationNode helicopterTranslation;
     private HelicopterNode helicopter;
     private HalfEdgeTriangleMeshNode triangleMesh;
     private CurveNode curveNode;
+    private double reflectionFactor = 0.0;
 
     /**
      * Constructor.
@@ -83,6 +86,11 @@ public class CGFrame extends AbstractCGFrame {
             derivativeInterval += 0.01;
             curveNode.setDerivativePoint(derivativeInterval);
         }
+        if (keyCode == KeyEvent.VK_R) {
+            System.out.println("Re-Rendering...");
+            Raytracer raytracer = new Raytracer(this.getCamera(), this.getRoot());
+            new ImageViewer(raytracer.render(WINDOW_WIDTH, WINDOW_BREADTH));
+        }
     }
 
     private void exercise6() {
@@ -90,13 +98,15 @@ public class CGFrame extends AbstractCGFrame {
         ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
         this.getRoot().addChild(shaderNode);
 
-        shaderNode.addChild(new FloorNode(-15.0, -1.0, 15.0, new Vector3(0.25, 0.25, 0.25)));
-        shaderNode.addChild(new SphereNode(0.4, 25, new Vector3(0.5, 1, -1), new Vector3(0.5, 0, 0.5)));
-        shaderNode.addChild(new SphereNode(0.6, 20, new Vector3(-0.2, 0.7, -1.3), new Vector3(0.9, 0.2, 0.1)));
-        shaderNode.addChild(new SphereNode(0.3, 20, new Vector3(2, 0.7, -1.6), new Vector3(0.8, 0.8, 0.8)));
+        shaderNode.addChild(new FloorNode(15, -2, 15.0, 0.2, new Vector3(0.25, 0.25, 0.25)));
+        GroupNode sphereGroup = new GroupNode();
+        shaderNode.addChild(sphereGroup);
+        sphereGroup.addChild(new SphereNode(0.8, 20, new Vector3(2, 1, 0.3), new Vector3(0.5, 0, 0.5), 0.5));
+        sphereGroup.addChild(new SphereNode(1, 20, new Vector3(-0.2, 0.2, -0.3), new Vector3(0.9, 0.2, 0.1), 0.1));
+        sphereGroup.addChild(new SphereNode(0.5, 20, new Vector3(2, 1, -2), new Vector3(0.8, 0.8, 0.8), 0.2));
         this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, 5), new Vector3(1,1, 1)));
         this.getRoot().addLightSource(new LightSource(new Vector3(5, 8, 0), new Vector3(1, 1, 1)));
-        new ImageViewer(raytracer.render(1920, 1080));
+        new ImageViewer(raytracer.render(WINDOW_WIDTH, WINDOW_BREADTH));
 
     }
 
@@ -171,7 +181,7 @@ public class CGFrame extends AbstractCGFrame {
         getRoot().addChild(shaderNode);
 
         // Adding the floor
-        floorNode = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH, new Vector3());
+        floorNode = new FloorNode(FLOORWIDTH, 0.1, FLOORBREADTH, reflectionFactor, new Vector3());
         shaderNode.addChild(floorNode);
 
         // adding the helicopter

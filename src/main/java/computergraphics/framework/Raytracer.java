@@ -4,6 +4,7 @@ import computergraphics.datastructures.IRaytraceable;
 import computergraphics.datastructures.IntersectionResult;
 import computergraphics.datastructures.Ray3D;
 import computergraphics.math.Vector3;
+import computergraphics.scenegraph.FloorNode;
 import computergraphics.scenegraph.Node;
 import computergraphics.scenegraph.RootNode;
 
@@ -54,6 +55,7 @@ public class Raytracer {
 
         //collect all nodes of the scenegraph
         nodes = collectNodes();
+        System.out.println("Nodes: " + nodes);
 
         for (int i = 0; i < resolutionX; i++) {
             double alpha = (double) i / (double) (resolutionX + 1) - 0.5;
@@ -108,14 +110,15 @@ public class Raytracer {
         //does the lighting
         if (closestIntersection.object != null) {
             for (int i = 0; i < rootNode.getNumberOfLightSources(); i++) {
+
                 //Vector from the intersection to the light
                 Vector3 lightVector = (rootNode.getLightSource(i).getPosition().subtract(closestIntersection.point.getNormalized())).getNormalized();
-                Vector3 objectColour = closestIntersection.object.getColour();
+                Vector3 objectColour = closestIntersection.object.getColour(closestIntersection.point);
                 Vector3 lightColour = rootNode.getLightSource(i).getColor();
 
                 //shadows
                 Ray3D shadowRay = new Ray3D(closestIntersection.point, lightVector.getNormalized());
-                if (traceShadows(shadowRay, 0)) {
+                if (traceShadows(shadowRay, 0, lightVector)) {
                     //if theres a intersection between the light and the point, add black(shadow)
                     result.add(new Vector3());
                     break;
@@ -136,7 +139,6 @@ public class Raytracer {
                 double r1 = lightVector.multiply(closestIntersection.normal) * 2;
                 Vector3 r2 = closestIntersection.normal.multiply(r1);
                 Vector3 r = lightVector.subtract(r2);
-                //buffer = r.multiply(ray.getDirection().multiply(-1)); //this should be the formula, but then the "highlighs" appear in the shadows
                 buffer = r.multiply(ray.getDirection());
                 if (buffer > 0.0) {
                     Vector3 specularColor = new Vector3(1, 1, 1).multiply(Math.pow(buffer, 20.0));
@@ -146,10 +148,24 @@ public class Raytracer {
                     specularColor.set(2, specularColor.get(2) * lightColour.get(2));
                     result = result.add(specularColor);
                 }
+
+                //
+                double reflectionFactor = ((IRaytraceable) closestIntersection.object).getReflectionFactor();
+                Vector3 reflection = new Vector3();
+                result = result.multiply(1.0 - reflectionFactor);
+
+                if (recursion < 5 && reflectionFactor > 0.0) {
+                    r1 = ray.getDirection().multiply(closestIntersection.normal) * 2;
+                    r2 = closestIntersection.normal.multiply(r1);
+                    r = ray.getDirection().subtract(r2);
+                    result = result.add(trace(new Ray3D(closestIntersection.point, r), recursion + 1).multiply(reflectionFactor));
+                }
+                //result = result.add(reflection.multiply(reflectionFactor));
             }
         }
         return result;
     }
+
 
     //collects -all- nodes from the scenegraph. probably theres a better solution (end-recursive)
     private ArrayList<Node> collectNodes() {
@@ -176,13 +192,16 @@ public class Raytracer {
         return new ArrayList<>(done);
     }
 
-    private boolean traceShadows(Ray3D ray, int recursion) {
+    private boolean traceShadows(Ray3D ray, int recursion, Vector3 lightVector) {
         //get the "closest" intersection on a ray
         for (Node n : nodes) {
             if (n instanceof IRaytraceable) {
                 IntersectionResult intersection = ((IRaytraceable) n).findIntersection(ray);
                 if (intersection != null) {
-                    return true;
+                    Vector3 intersectionDistance = (ray.getPoint().subtract(intersection.point.getNormalized())).getNormalized();
+                    if (intersectionDistance.getNorm() - 0.00000001 <= lightVector.getNorm()) {
+                        return true;
+                    }
                 }
             }
         }
