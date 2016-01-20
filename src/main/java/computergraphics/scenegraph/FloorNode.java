@@ -91,7 +91,6 @@ public class FloorNode extends Node implements IRaytraceable {
         if ((int) u % 2 == (int) v % 2) {
             return new Vector3();
         } else {
-            System.out.println("white");
             return new Vector3(1, 1, 1);
         }
     }

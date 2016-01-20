@@ -149,9 +149,8 @@ public class Raytracer {
                     result = result.add(specularColor);
                 }
 
-                //
+                //Reflections
                 double reflectionFactor = ((IRaytraceable) closestIntersection.object).getReflectionFactor();
-                Vector3 reflection = new Vector3();
                 result = result.multiply(1.0 - reflectionFactor);
 
                 if (recursion < 5 && reflectionFactor > 0.0) {
@@ -160,7 +159,6 @@ public class Raytracer {
                     r = ray.getDirection().subtract(r2);
                     result = result.add(trace(new Ray3D(closestIntersection.point, r), recursion + 1).multiply(reflectionFactor));
                 }
-                //result = result.add(reflection.multiply(reflectionFactor));
             }
         }
         return result;

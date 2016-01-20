@@ -101,7 +101,7 @@ public class CGFrame extends AbstractCGFrame {
         shaderNode.addChild(new FloorNode(15, -2, 15.0, 0.2, new Vector3(0.25, 0.25, 0.25)));
         GroupNode sphereGroup = new GroupNode();
         shaderNode.addChild(sphereGroup);
-        sphereGroup.addChild(new SphereNode(0.8, 20, new Vector3(2, 1, 0.3), new Vector3(0.5, 0, 0.5), 0.5));
+        sphereGroup.addChild(new SphereNode(0.8, 20, new Vector3(2, 1, 0.3), new Vector3(0.5, 0, 0.5), 1));
         sphereGroup.addChild(new SphereNode(1, 20, new Vector3(-0.2, 0.2, -0.3), new Vector3(0.9, 0.2, 0.1), 0.1));
         sphereGroup.addChild(new SphereNode(0.5, 20, new Vector3(2, 1, -2), new Vector3(0.8, 0.8, 0.8), 0.2));
         this.getRoot().addLightSource(new LightSource(new Vector3(-5, 8, 5), new Vector3(1,1, 1)));
